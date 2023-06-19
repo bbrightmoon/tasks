@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
-from celery import shared_task
 from django.core.mail import send_mail
+from celery import shared_task
+
 from catalog.models import Product
 from project0.settings.env_reader import env
 

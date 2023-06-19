@@ -1,4 +1,3 @@
-
 JAZZMIN_SETTINGS = {
     "site_title": "Library Admin",
     "site_header": "Library",

@@ -1,4 +1,5 @@
 from django_filters import rest_framework as filter
+
 from catalog.models import Product
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+
 from user.models import User
 from catalog.utils import compress
 

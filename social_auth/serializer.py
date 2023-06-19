@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from social_auth import google_login
-from .register import register_social_user
+from social_auth.register import register_social_user
 
 
 class GoogleSocialAuthSerializer(serializers.Serializer):

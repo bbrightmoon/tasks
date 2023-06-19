@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from .models import Category, Product
+
+from catalog.models import Category, Product
 
 
 class ProductSerializer(serializers.ModelSerializer):

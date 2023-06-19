@@ -1,7 +1,8 @@
+import random
 from django.contrib.auth import authenticate
+
 from user.models import User
 from project0.settings.env_reader import env
-import random
 
 
 def generate_username(name):

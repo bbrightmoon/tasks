@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from catalog import models
 
 
@@ -14,7 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
                    'created',
                    'updated',
                    'discount']
-    list_editable = ['discount', 'amount' ]
+    list_editable = ['discount', 'amount']
     list_per_page = 10
 
 

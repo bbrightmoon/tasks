@@ -1,23 +1,23 @@
+from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.pagination import PageNumberPagination
+from drf_multiple_model.views import ObjectMultipleModelAPIView
+
+from catalog.models import Product, Category
+from user.permissions import Administrator, Tenant
+from catalog.filter import ProductFilter
+from catalog.utils import LimitPagination
+from user.models import User
+from user.serializer import LoginSerializer
 from catalog.serializer import (
     ProductSerializer,
     ProductValidateSerializer,
     CategorySerializer,
     CategoryValidateSerializer,
-    SearchSerializer
+    SearchSerializer,
 )
-from catalog.models import Product, Category
-from user.permissions import Administrator, Tenant
-from rest_framework import filters
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from catalog.filter import ProductFilter
-from django.db.models import Q
-from rest_framework.pagination import PageNumberPagination
-from drf_multiple_model.views import ObjectMultipleModelAPIView
-from catalog.utils import LimitPagination
-from user.models import User
-from user.serializer import LoginSerializer
-
 
 
 class ProductAPIView(ListCreateAPIView):
@@ -28,7 +28,7 @@ class ProductAPIView(ListCreateAPIView):
     pagination_class = PageNumberPagination
 
     def get_serializer_class(self):
-        if self.request.method == 'GET':
+        if self.request.method == "GET":
             return ProductSerializer
         else:
             return ProductValidateSerializer
@@ -47,11 +47,11 @@ class CategoryAPIView(ListCreateAPIView):
     queryset = Category.objects.all()
     permission_classes = [Administrator]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['id', 'name']
+    search_fields = ["id", "name"]
     pagination_class = PageNumberPagination
 
     def get_serializer_class(self):
-        if self.request.method == 'GET':
+        if self.request.method == "GET":
             return CategorySerializer
         else:
             return CategoryValidateSerializer
@@ -71,22 +71,24 @@ class SearchAPIView(ObjectMultipleModelAPIView):
     serializer_class = SearchSerializer
 
     def get_querylist(self, *args, **kwargs):
-        search = self.request.GET.get('search')
-        print(search)
+        search = self.request.GET.get("search")
         if search:
             querylist = [
                 {
-                    'queryset': Product.objects.filter(Q(title__icontains=search) | Q(description__icontains=search) |
-                                                       Q(category__name__icontains=search)),
-                    'serializer_class': ProductSerializer,
+                    "queryset": Product.objects.filter(
+                        Q(title__icontains=search)
+                        | Q(description__icontains=search)
+                        | Q(category__name__icontains=search)
+                    ),
+                    "serializer_class": ProductSerializer,
                 },
                 {
-                    'queryset': Category.objects.filter(Q(name__icontains=search)),
-                    'serializer_class': CategorySerializer,
+                    "queryset": Category.objects.filter(Q(name__icontains=search)),
+                    "serializer_class": CategorySerializer,
                 },
                 {
-                    'queryset': User.objects.filter(Q(username__icontains=search)),
-                    'serializer_class': LoginSerializer,
-                }]
+                    "queryset": User.objects.filter(Q(username__icontains=search)),
+                    "serializer_class": LoginSerializer,
+                },
+            ]
             return querylist
-
