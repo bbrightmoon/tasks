@@ -14,7 +14,8 @@ class ProductSerializer(serializers.ModelSerializer):
                   'image',
                   'created',
                   'updated',
-                  'category']
+                  'category',
+                  'rate',]
 
 
 class CategorySerializer(serializers.ModelSerializer):

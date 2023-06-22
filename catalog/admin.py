@@ -1,9 +1,9 @@
 from django.contrib import admin
+from django.shortcuts import render
 
-from catalog import models
+from catalog.models import Product, Category
 
 
-@admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title',
                     'amount',
@@ -18,12 +18,43 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['discount', 'amount']
     list_per_page = 10
 
+    def analyticts(self, request):
+        products = Product.objects.all()
+        data = [x.rate for x in products]
+        titles = [x.title for x in products]
 
-@admin.register(models.Category)
+        return render(request, "templates/dashboard.html", {"titles": titles, "data": data, "title": "Product Dashboard"})
+
+    def get_urls(self):
+        urls = super().get_urls()
+        from django.urls import path
+        custom_urls = [path("analyticts/", self.analyticts), ]
+        return custom_urls + urls
+
+
+admin.site.register(Product, ProductAdmin)
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'id']
     search_fields = ['name']
     list_per_page = 10
+
+
+admin.site.register(Category, CategoryAdmin)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

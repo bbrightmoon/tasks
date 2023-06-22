@@ -1,0 +1,57 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        integrity="sha256-Uv9BNBUCCPipKQ2NS9wYpJmi8DTOEfTA/nH2a0JALw=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2XYKwLAt080ZqjeFOE=" crossorigin="anonymous">
+    <script src="https: //code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{% for title in titles%}'{{ title }}', {% endfor %}],
+                datasets: [{
+                    labels: 'rating of products',
+                    data: {{ data }},
+                    backgroundColor: 'rgba(148,255,86,0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <canvas id="myChart" width="400" height="100" ></canvas>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

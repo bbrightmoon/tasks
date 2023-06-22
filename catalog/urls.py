@@ -19,7 +19,7 @@ urlpatterns = [
         name="product-update-del"
     ),
     path(
-        "categories/<int:id>",
+        "categories/<int:id>/",
         views.CategoryUpdateDeleteAPIView.as_view(),
         name="category-update-del"
     ),

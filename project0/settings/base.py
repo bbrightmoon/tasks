@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+
+
 from .env_reader import env
 from datetime import timedelta
 
@@ -12,9 +14,9 @@ PRODUCTION = env("PRODUCTION", default=False, cast=bool)
 
 LOCAL_APPS = ["catalog", "user", "social_auth", "importcsv"]
 
-THEME_APPS = [
-    "jazzmin",
-]
+# THEME_APPS = [
+#     "jazzmin",
+# ]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -26,7 +28,7 @@ THIRD_PARTY_APPS = [
 ]
 
 INSTALLED_APPS = [
-    *THEME_APPS,
+      # THEME_APPS,
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -81,8 +83,10 @@ EMAIL_USE_SSL = True
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "project0/social_auth/templates")],
         "APP_DIRS": True,
+        "DIRS": [
+            BASE_DIR,
+            os.path.join(BASE_DIR, 'templates')],
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",

@@ -49,6 +49,9 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, related_name="categories", on_delete=models.CASCADE,
         null=True, verbose_name='категория')
+    rate = models.FloatField(
+        null=True, blank=True, verbose_name='рейтинг'
+    )
 
     def __str__(self) -> str:
         return str(self.title)
@@ -61,3 +64,5 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
+
+

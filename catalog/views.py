@@ -92,3 +92,4 @@ class SearchAPIView(ObjectMultipleModelAPIView):
                 },
             ]
             return querylist
+
