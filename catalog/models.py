@@ -2,6 +2,7 @@ from django.db import models
 
 from user.models import User
 from catalog.utils import compress
+from django.core.validators import MinValueValidator
 
 
 class Category(models.Model):
@@ -50,7 +51,7 @@ class Product(models.Model):
         Category, related_name="categories", on_delete=models.CASCADE,
         null=True, verbose_name='категория')
     rate = models.FloatField(
-        null=True, blank=True, verbose_name='рейтинг'
+        null=True, blank=True, verbose_name='рейтинг', validators=[MinValueValidator(0)]
     )
 
     def __str__(self) -> str:
@@ -64,5 +65,4 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-
 

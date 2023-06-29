@@ -12,11 +12,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Production
 PRODUCTION = env("PRODUCTION", default=False, cast=bool)
 
-LOCAL_APPS = ["catalog", "user", "social_auth", "importcsv"]
+LOCAL_APPS = ["catalog", "user", "social_auth", "importcsv", "chat"]
 
-# THEME_APPS = [
-#     "jazzmin",
-# ]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -25,10 +22,13 @@ THIRD_PARTY_APPS = [
     "drf_multiple_model",
     "social_django",
     "debug_toolbar",
+
 ]
 
 INSTALLED_APPS = [
-      # THEME_APPS,
+    "jazzmin",
+    "channels",
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -54,6 +54,28 @@ MIDDLEWARE = [
 ROOT_URLCONF = "project0.urls"
 
 SITE_ID = 1
+
+
+ASGI_APPLICATION = "project0.asgi.application"
+# WSGI_APPLICATION = "project0.wsgi.application"
+
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
 
 CELERY_BROKER_URL = env("BROKER_URL")
 CELERY_RESULT_BACKEND = env("RESULT_BACKEND")
@@ -104,7 +126,7 @@ GOOGLE_CLIENT_ID = env("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = env("GOOGLE_CLIENT_SECRET")
 
 
-WSGI_APPLICATION = "project0.wsgi.application"
+
 
 LANGUAGE_CODE = "ru-RU"
 

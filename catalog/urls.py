@@ -10,21 +10,23 @@ urlpatterns = [
     ),
     path(
         "categories/",
-        views.CategoryAPIView.as_view(),
+        cache_page(15)(views.CategoryAPIView.as_view()),
         name='category-list'
     ),
     path(
         "<int:id>/",
-        views.ProductUpdateDeleteAPIView.as_view(),
+        cache_page(15)
+        (views.ProductUpdateDeleteAPIView.as_view()),
         name="product-update-del"
     ),
     path(
         "categories/<int:id>/",
-        views.CategoryUpdateDeleteAPIView.as_view(),
+        cache_page(15)
+        (views.CategoryUpdateDeleteAPIView.as_view()),
         name="category-update-del"
     ),
     path(
-        "search/", views.SearchAPIView.as_view()
+        "search/", cache_page(15)(views.SearchAPIView.as_view())
     )
 ]
 

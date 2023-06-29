@@ -12,14 +12,14 @@ JAZZMIN_SETTINGS = {
     "search_model": ["auth.User", "auth.Group"],
     "user_avatar": None,
     "topmenu_links": [
+        {"name": "Product statistic", "url": "http://127.0.0.1:8000/admin/catalog/product/analytics/"},
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
         {"model": "auth.User"},
-        {"app": "books"},
     ],
     "usermenu_links": [
         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-        {"model": "auth.user"}
+        {"analytics": "auth.user"}
     ],
     "show_sidebar": True,
     "navigation_expanded": True,

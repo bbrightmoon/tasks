@@ -18,17 +18,17 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['discount', 'amount']
     list_per_page = 10
 
-    def analyticts(self, request):
+    def analytics(self, request):
         products = Product.objects.all()
         data = [x.rate for x in products]
         titles = [x.title for x in products]
 
-        return render(request, "templates/dashboard.html", {"titles": titles, "data": data, "title": "Product Dashboard"})
+        return render(request, "dashboard.html", {"titles": titles, "data": data, "title": "Product Dashboard"})
 
     def get_urls(self):
         urls = super().get_urls()
         from django.urls import path
-        custom_urls = [path("analyticts/", self.analyticts), ]
+        custom_urls = [path("analytics/", self.analytics), ]
         return custom_urls + urls
 
 
