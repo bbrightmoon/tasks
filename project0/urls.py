@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/v1/csv/', include('importcsv.url')),
     path('chat/', include('chat.urls'))
 ]
+
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [path(r"debug/", include(debug_toolbar.urls))]

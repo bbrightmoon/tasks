@@ -48,7 +48,7 @@ class Product(models.Model):
         auto_now=True, verbose_name='обновлено'
     )
     category = models.ForeignKey(
-        Category, related_name="categories", on_delete=models.CASCADE,
+        Category, related_name="product", on_delete=models.CASCADE,
         null=True, verbose_name='категория')
     rate = models.FloatField(
         null=True, blank=True, verbose_name='рейтинг', validators=[MinValueValidator(0)]

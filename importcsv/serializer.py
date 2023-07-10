@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CSVSource
+from importcsv.models import CSVSource
 
 
 class CSVSerializer(serializers.ModelSerializer):
