@@ -25,17 +25,15 @@ class CSVSourceView(View):
                     weight=row[26]
                 )
                 for row in list_of_dict
-
             ]
-            msg = CSVSource.objects.bulk_create(objs)
+
             try:
                 msg = CSVSource.objects.bulk_create(objs)
                 returnmsg = {'status code': 200}
-                print('Uploaded successfully')
 
             except Exception as e:
-                print("Error while importing file")
-                returnmsg = {'status code': 500}
+                returnmsg = {'status code': 500,
+                             "message": "Error while importing file"}
 
             return JsonResponse(returnmsg)
 
